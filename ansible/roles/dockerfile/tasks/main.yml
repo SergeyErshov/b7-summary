@@ -1,18 +1,18 @@
 ---
 # tasks file for dockerfile
-- name: create ditrib dir on remote host
+- name: create distrib dir on remote host
   file:
-    path: /tmp/distrib
+    path: /tmp/distrib/docker
     state: directory
 
 - name: copy nedeed files on remote host
   template:
     src: "{{ item.src }}"
-    dest: "/tmp/distrib"
+    dest: "{{ item.dest }}"
   loop:
-    - { src: '/home/esm/docker/b7-summary/docker/dockerfile' }
-    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.py' }
-    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.conf' }
+    - { src: '/home/esm/docker/b7-summary/docker/dockerfile', dest: '/tmp/distrib/docker/' }
+    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.py', dest: '/tmp/distrib/' }
+    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.conf', dest: '/tmp/distrib/' }
 
 - name: edit web.conf
   lineinfile:
