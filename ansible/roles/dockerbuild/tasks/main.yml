@@ -1,0 +1,19 @@
+---
+# tasks file for dockerbuild
+- name: building docker image on remote host
+  docker_image:
+    name: "webapp"
+    tag: "v1"  
+    build:
+      path: "/tmp/distrib/docker"
+    source: "build"
+
+- name: runing docker image
+  docker_container:
+    name: "webapp"
+    image: "webapp:v1"
+    state: started
+    ports: "8080:80"
+    volumes: "/srv/app:/srv/app"
+    command: [ "python3", "./web.py" ]
+
