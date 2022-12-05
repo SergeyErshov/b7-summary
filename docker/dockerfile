@@ -1,10 +1,11 @@
-FROM python:3
+FROM ubuntu:20.04
 LABEL name="webapp"
-LABEL version="1.0"
 WORKDIR /srv/app
 RUN apt-get update && apt-get install -y \
-	python3-virtualenv \
+	python3 \
+	python3-pip \
+	python3.8-venv \
 	python3-psycopg2 \
-	python3-configparser \
-	&& python3 -m venv venv && source venv/bin/activate && pip install flask
+	python-configparser
+CMD /bin/bash -c "python3 -m venv venv && source venv/bin/activate && pip install flask"
 CMD [ "python", "./web.py" ]
