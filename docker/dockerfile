@@ -1,4 +1,6 @@
 FROM python:3
+LABEL name="webapp"
+LABEL version="1.0"
 WORKDIR /srv/app
 RUN apt-get update && apt-get install -y \
 	python3-vevn \
