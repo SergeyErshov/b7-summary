@@ -1,0 +1,26 @@
+---
+# tasks file for dockerfile
+- name: create ditrib dir on remote host
+  file:
+    path: /tmp/distrib
+    state: directory
+
+- name: copy nedeed files on remote host
+  template:
+    src: "{{ item.src }}"
+    dest: "/tmp/distrib"
+  loop:
+    - { src: '/home/esm/docker/b7-summary/docker/dockerfile' }
+    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.py' }
+    - { src: '/home/esm/docker/b7-summary/distrib/DEVOPS-praktikum_Docker/web.conf' }
+
+- name: edit web.conf
+  lineinfile:
+    dest: "/tmp/distrib/web.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^db_host', line: 'db_host = ''localhost''' }
+    - { regexp: '^db_user', line: 'db_user = ''{{ db_user }}''' }
+    - { regexp: '^db_password', line: 'db_password = ''{{ db_pass }}''' }
+    - { regexp: '^db_name', line: 'db_name = ''{{ db_name }}''' }
