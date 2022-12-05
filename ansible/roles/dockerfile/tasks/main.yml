@@ -37,4 +37,11 @@
     remote_src: true  
   loop:
     - { src: '/tmp/distrib/web.py', dest: '/srv/app/' }
-    - { src: '/tmp/distrib/web.conf', dest: '/srv/app/conf/' } 
+    - { src: '/tmp/distrib/web.conf', dest: '/srv/app/conf/' }
+
+- name: make web.py executable
+  file:
+    path: /srv/app/web.py
+    owner: root
+    group: root
+    mode: "0755" 
