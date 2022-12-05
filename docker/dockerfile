@@ -5,5 +5,4 @@ RUN apt-get update && apt-get install -y \
 	python3-psycopg2 \
 	python-configparser \
 	&& python3 -m venv venv && source venv/bin/activate && pip install flask
-COPY /tmp/distrib/web.py ./ && /tmp/distrib/web.conf ./conf/web.conf
 CMD [ "python", "./web.py" ]
