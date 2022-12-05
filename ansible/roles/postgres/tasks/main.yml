@@ -43,3 +43,24 @@
     roles: "{{ db_user }}"
     grant_option: no
     privs: all
+
+- name: edit pg_hba conf for accept connections from all
+  lineinfile:
+    path: "/etc/postgresql/12/main/pg_hba.conf"
+    insertbefore: '^# Allow replication connections from localhost'
+    line: 'host    all             all             0.0.0.0/0            md5'
+    backup: true
+
+- name: edit postgresql conf for listening all interfaces
+  lineinfile:
+    path: "/etc/postgresql/12/main/postgresql.conf"
+    insertbefore: '^#listen_addresses = ''localhost'''
+    line: 'listen_addresses = ''*'''
+    backup: true
+
+
+- name: restarting postgresql service
+  service:
+    name: postgresql
+    state: restarted
+
