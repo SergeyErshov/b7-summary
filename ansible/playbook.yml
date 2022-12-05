@@ -10,3 +10,4 @@
     - role: "/home/esm/docker/b7-summary/ansible/roles/docker"
     - role: "/home/esm/docker/b7-summary/ansible/roles/postgres"
     - role: "/home/esm/docker/b7-summary/ansible/roles/dockerfile"
+    - role: "/home/esm/docker/b7-summary/ansible/roles/dockerbuild"
