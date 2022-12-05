@@ -24,3 +24,17 @@
     - { regexp: '^db_user', line: 'db_user = ''{{ db_user }}''' }
     - { regexp: '^db_password', line: 'db_password = ''{{ db_pass }}''' }
     - { regexp: '^db_name', line: 'db_name = ''{{ db_name }}''' }
+
+- name: create app dir on remote host
+  file:
+    path: /srv/app/conf
+    state: directory
+
+- name: copy files to /srv/app
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    remote_src: true  
+  loop:
+    - { src: '/tmp/distrib/web.py', dest: '/srv/app/' }
+    - { src: '/tmp/distrib/web.conf', dest: '/srv/app/conf/' } 
