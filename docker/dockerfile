@@ -5,6 +5,6 @@ WORKDIR /srv/app
 RUN apt-get update && apt-get install -y \
 	python3-virtualenv \
 	python3-psycopg2 \
-	python-configparser \
+	python3-configparser \
 	&& python3 -m venv venv && source venv/bin/activate && pip install flask
 CMD [ "python", "./web.py" ]
