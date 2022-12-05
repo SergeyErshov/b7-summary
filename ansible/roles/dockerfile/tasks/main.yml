@@ -20,7 +20,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   loop:
-    - { regexp: '^db_host', line: 'db_host = ''localhost''' }
+    - { regexp: '^db_host', line: 'db_host = ''{{ db_host }}''' }
     - { regexp: '^db_user', line: 'db_user = ''{{ db_user }}''' }
     - { regexp: '^db_password', line: 'db_password = ''{{ db_pass }}''' }
     - { regexp: '^db_name', line: 'db_name = ''{{ db_name }}''' }
