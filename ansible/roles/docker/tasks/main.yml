@@ -4,7 +4,7 @@
   apt:
     pkg: 
       - docker.io
-      - docker
+      - docker  
     state: present
     update_cache: true
 
@@ -12,4 +12,13 @@
   service:
     name: docker
     state: started
+
+- name: install python-pip for using ansible docker module
+  apt:
+    name: python3-pip
+    state: present
+
+- name: install docker SDK for python
+  pip:
+    name: docker  
 
