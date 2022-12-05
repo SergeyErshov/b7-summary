@@ -1,10 +1,5 @@
-FROM ubuntu:20.04
+FROM alpine:latest
 LABEL name="webapp"
 WORKDIR /srv/app
-RUN apt-get update && apt-get install -y \
-	python3 \
-	python3-pip \
-	python3.8-venv \
-	python3-psycopg2 \
-	python-configparser
-CMD /bin/bash -c "python3 -m venv venv && source venv/bin/activate && pip install flask"
+RUN apk update && apk add --no-cache python3 py3-pip py3-psycopg2 py3-configargparse && pip install flask
+
