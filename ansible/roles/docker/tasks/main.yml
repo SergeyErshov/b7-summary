@@ -1,0 +1,15 @@
+---
+# tasks file for docker
+- name: install docker
+  apt:
+    pkg: 
+      - docker.io
+      - docker
+    state: present
+    update_cache: true
+
+- name: starting docker service
+  service:
+    name: docker
+    state: started
+
