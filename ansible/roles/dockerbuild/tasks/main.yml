@@ -13,7 +13,7 @@
     name: "webapp"
     image: "webapp:v1"
     state: started
-    ports: "80:80"
+    ports: "80:5000"
     volumes: "/srv/app:/srv/app"
     command: [ "python3", "./web.py" ]
 
