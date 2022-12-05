@@ -1,0 +1,45 @@
+---
+# tasks file for postgres
+- name: install postgresql server and client
+  apt:
+    pkg:
+      - postgresql
+      - postgresql-client
+    state: present
+    update_cache: true
+
+- name: intall psycopg2 for postgresql_db ansible module
+  apt:
+    name: python3-psycopg2
+    state: present
+
+- name: starting postgersql service
+  service:
+    name: postgresql
+    state: started
+
+- name: create db
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ db_name }}"
+    login_user: postgres
+    state: present
+
+- name: create db user
+  become: true
+  become_user: postgres
+  postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    state: present
+
+- name: grant privilage on db for user
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    type: database
+    database: "{{ db_name }}"
+    roles: "{{ db_user }}"
+    grant_option: no
+    privs: all
